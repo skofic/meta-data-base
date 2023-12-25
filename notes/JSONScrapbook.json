@@ -9,7 +9,6 @@
 			name: "Name of term"
 		},
 		info: { // Information.
-			class: ["List of term classes, enum"],
 			domain: ["List of term domains, enum"],
 			keyword: ["List of term keywords, string"],
 			tag: ["List of term tags, enum"],
@@ -22,6 +21,7 @@
 			providers: ["List of providers, Markdown"]
 		},
 		type: { // Data type.
+			class: ["List of term classes, enum"],
 			scalar/array/set/dict
 		},
 		prop: { // Structure rules.
@@ -40,7 +40,6 @@
 			name: "Name of term"
 		},
 		term_info: { // Information.
-			class: ["List of term classes, enum"],
 			domain: ["List of term domains, enum"],
 			keyword: ["List of term keywords, string"],
 			tag: ["List of term tags, enum"],
@@ -53,6 +52,7 @@
 			providers: ["List of providers, Markdown"]
 		},
 		term_type: { // Data type.
+			class: ["List of term classes, enum"],
 			scalar/array/set/dict
 		},
 		term_prop: { // Structure rules.
@@ -71,7 +71,6 @@
 			term_name: "Name of term"
 		},
 		term_info: { // Information.
-			term_class: ["List of term classes, enum"],
 			term_domain: ["List of term domains, enum"],
 			term_keyword: ["List of term keywords, string"],
 			term_tag: ["List of term tags, enum"],
@@ -84,6 +83,7 @@
 			term_providers: ["List of providers, Markdown"]
 		},
 		term_type: { // Data type.
+			term_class: ["List of term classes, enum"],
 			scalar/array/set/dict
 		},
 		term_prop: { // Structure rules.
