@@ -9,9 +9,6 @@
 			name: "Name of term"
 		},
 		info: { // Information.
-			domain: ["List of term domains, enum"],
-			keyword: ["List of term keywords, string"],
-			tag: ["List of term tags, enum"],
 			title: {iso_639_3_eng: "Title or label, plain text"},
 			definition {iso_639_3_eng: "Definition, plain text"},
 			description {iso_639_3_eng: "Description, Markdown"},
@@ -20,8 +17,13 @@
 			references: ["List of references, Markdown"],
 			providers: ["List of providers, Markdown"]
 		},
-		type: { // Data type.
+		cats: {
 			class: ["List of term classes, enum"],
+			domain: ["List of term domains, enum"],
+			keyword: ["List of term keywords, string"],
+			tag: ["List of term tags, enum"],
+		},
+		type: { // Data type.
 			scalar/array/set/dict
 		},
 		prop: { // Structure rules.
@@ -40,9 +42,6 @@
 			name: "Name of term"
 		},
 		term_info: { // Information.
-			domain: ["List of term domains, enum"],
-			keyword: ["List of term keywords, string"],
-			tag: ["List of term tags, enum"],
 			title: {iso_639_3_eng: "Title or label, plain text"},
 			definition {iso_639_3_eng: "Definition, plain text"},
 			description {iso_639_3_eng: "Description, Markdown"},
@@ -51,8 +50,13 @@
 			references: ["List of references, Markdown"],
 			providers: ["List of providers, Markdown"]
 		},
-		term_type: { // Data type.
+		term_cats: {
 			class: ["List of term classes, enum"],
+			domain: ["List of term domains, enum"],
+			keyword: ["List of term keywords, string"],
+			tag: ["List of term tags, enum"],
+		},
+		term_type: { // Data type.
 			scalar/array/set/dict
 		},
 		term_prop: { // Structure rules.
@@ -61,6 +65,7 @@
 			banned: ["List of banned properties"]
 		}
 	},
+	
 	{
 		term_code: { // Identification.
 			term_nid: "namespace gid",
@@ -73,7 +78,6 @@
 		term_info: { // Information.
 			term_domain: ["List of term domains, enum"],
 			term_keyword: ["List of term keywords, string"],
-			term_tag: ["List of term tags, enum"],
 			term_title: {iso_639_3_eng: "Title or label, plain text"},
 			term_definition {iso_639_3_eng: "Definition, plain text"},
 			term_description {iso_639_3_eng: "Description, Markdown"},
@@ -84,6 +88,7 @@
 		},
 		term_type: { // Data type.
 			term_class: ["List of term classes, enum"],
+			term_tag: ["List of term tags, enum"],
 			scalar/array/set/dict
 		},
 		term_prop: { // Structure rules.
