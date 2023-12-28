@@ -4,11 +4,11 @@
 			nid: "namespace gid",
 			lid: "local identifier",
 			gid: "global identifier",
-			aid: ["all", "codes", "in use"],
-			regexp: "Regular expression for lid",
-			name: "Name of term"
+			pid: "namespace",
+			aid: ["all", "codes", "in use"]
 		},
 		info: { // Information.
+			name: "Name of term",
 			title: {iso_639_3_eng: "Title or label, plain text"},
 			definition {iso_639_3_eng: "Definition, plain text"},
 			description {iso_639_3_eng: "Description, Markdown"},
@@ -32,6 +32,41 @@
 			banned: ["List of banned properties"]
 		}
 	},
+	
+	{
+		code_: { // Identification.
+			nid_: "namespace gid",
+			lid_: "local identifier",
+			gid_: "global identifier",
+			pid_: "namespace",
+			aid_: ["all", "codes", "in use"]
+		},
+		info_: { // Information.
+			name_: "Name of term",
+			title_: {iso_639_3_eng: "Title or label, plain text"},
+			definition_: {iso_639_3_eng: "Definition, plain text"},
+			description_: {iso_639_3_eng: "Description, Markdown"},
+			examples_: [{iso_639_3_eng: "Usage examples, Markdown"}],
+			notes_: ["List of notes and comments, Markdown"],
+			references_: ["List of references, Markdown"],
+			providers_: ["List of providers, Markdown"]
+		},
+		cats: {
+			class: ["List of term classes, enum"],
+			domain: ["List of term domains, enum"],
+			keyword: ["List of term keywords, string"],
+			tag: ["List of term tags, enum"],
+		},
+		type: { // Data type.
+			scalar/array/set/dict
+		},
+		prop: { // Structure rules.
+			default: <Default value, if any>,
+			required: ["List of required property names"],
+			banned: ["List of banned properties"]
+		}
+	},
+	
 	{
 		term_code: { // Identification.
 			nid: "namespace gid",
@@ -61,6 +96,7 @@
 		},
 		term_prop: { // Structure rules.
 			default: <Default value, if any>,
+			expected: ["List of expected property names"],
 			required: ["List of required property names"],
 			banned: ["List of banned properties"]
 		}
@@ -89,12 +125,50 @@
 		term_type: { // Data type.
 			term_class: ["List of term classes, enum"],
 			term_tag: ["List of term tags, enum"],
-			scalar/array/set/dict
+			term_scalar/term_array/term_set/term_dict
 		},
 		term_prop: { // Structure rules.
 			term_default: <Default value, if any>,
+			term_expected: ["List of expected property names"],
 			term_required: ["List of required property names"],
 			term_banned: ["List of banned properties"]
 		}
 	},
+	
+	
+	{
+		term_type: {
+			scalar: {
+				data_type: "type_string_enum",
+				data_kind: "iso_639_3"
+			}
+		},
+		
+		term_type: {
+			array: {
+				array_recurse: {
+					items_min: 0,
+					items_max: 2
+				},
+				array_elements:{
+					min: 5,
+					max: 7
+				},
+				scalar: {
+					data_type: "type_string_enum",
+					data_kind: "iso_639_3"
+				}
+			}
+		},
+		
+		term_type: {
+			set: {
+				array_recurse: [2, 2],
+				scalar: {
+					term_type_data: "type_string_enum",
+					term_type_: "iso_639_3"
+				}
+			}
+		},
+	}
 ]
