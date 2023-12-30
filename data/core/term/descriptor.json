@@ -102,7 +102,7 @@
 		},
 		"term_type": {
 			"type": "type_object",
-			"kind": "term"
+			"kind": "term_info"
 		},
 		"term_prop": {
 			"expected": [
@@ -118,6 +118,41 @@
 			"required": [
 				"title",
 				"definition"
+			]
+		}
+	},
+	
+	{
+		"term_info": {
+			"nid": "term",
+			"lid": "cats",
+			"gid": "term_cats",
+			"aid": ["term_cats"]
+		},
+		"term_info": {
+			"title": {
+				"iso_639_3_eng": "Categories section"
+			},
+			"definition": {
+				"iso_639_3_eng": "Term categories section."
+			},
+			"description": {
+				"iso_639_3_eng": "The *categories section* of a *term* is used to group all *categorical properties* in a *single section*. These categorical properties should provide both *information* on the *nature* of the *term*, as well as providing *keywords* that can be used to *search* the *dictionary*:\n\n- [Class](class.md) (`class`): the *class* of a term represents the *term's* *nature* and *function*, whether it is an *identifier*, a *quantitative* value or a *categorical* value. The field is an *array* of *controlled vocabulary elements*, so more than one category may apply. This category is *required*, at least to indicate whether descriptors hold *quantitative* values or not.\n- [Domain](domain.md) (`domain`): the *domain* of a term should indicate whether the *term* is *environmental*, *economic*, *genetic*, *phenotipic*, etc. It should indicate to what *domains* the *term belongs*. This is also a *list* of *controlled vocabulary elements*, so a *term* may have *several domains*. This field should be filled *if relevant*.\n- [Tags](tag.md) (`tag`): this property is a *list* of *controlled vocabulary elements* that indicate what *usage* the term may have. For instance, if the term is a descriptor that is used to illustrate the *vulnerability* of a population you would create the vulnerability tag and assign it. This property should be managed by the different teams that use it.\n- [Keywords](keyword.md) (`keyword`): this property contains a *list of keywords* associated with the *term*. These keywords are *strings* and not controlled vocabularies, as with the other properties of this section, so you are free to use your own definitions. This is a *recommended* property in all cases.\n\nThe controlled vocabularies associated with these properties can be enriched in time with specialised enumerations that apply to specific areas of interest, this will allow *different teams* to *collaborate* *without disrupting* each other's *domains*."
+			}
+		},
+		"term_type": {
+			"type": "type_object",
+			"kind": "term_cats"
+		},
+		"term_prop": {
+			"expected": [
+				"class",
+				"domain",
+				"keyword",
+				"tag"
+			],
+			"required": [
+				"class"
 			]
 		}
 	}
