@@ -16,7 +16,45 @@
 				"iso_639_3_eng": "*Namespaces* are used to *group* terms under the same *category* or *classification*, the value of this property is the [global identifier](gid.md) of the *term* that *represents* the *namespace* of the *current term*.\n\nNamespaces are also used to *disambiguate* [local identifiers](lid.md): *local identifiers* must be *unique* within the same *namespace*.\n\n*Most* terms will have a namespace, but this property is *not required*: terms that do not have a namespace are usually used as top level namespaces.\n\nAny term's [global identifier](gid.md) can be used as a *namespace*."
 			},
 			"examples": {
-				"iso_639_3_eng": "```json\n{\n\t\"term_code\": {\n\t\t\"nid\": \"iso_3166_1\",\n\t\t\"lid\": \"ITA\",\n\t\t\"gid\": \"iso_3166_1_ITA\",\n\t\t\"aid\": [\"ITA\", \"IT\"],\n\t\t\"regexp\": \"[A-Z]{3,3}\"\n\t},\n\t...\n}\n```\n\nThis term, with [global identifier](gid.md) `iso_3166_1_ITA`, represents the *ISO country code* for *Italy*, it has a [local identifier](lid.md) `ITA` and a *namespace* `iso_3166_1`. This *namespace* is the concatenation of the following *namespaces*:\n\n- `iso`: A term that represents the \"*International Standards Organisation*\" (ISO) root namespace.\n- `3166`: A term, that has the `iso` term as its *namespace*, which represents the \"*codes for the representation of names of countries and their subdivisions*\".\n- `1`: A term, that has the `iso_3166` term as its *namespace*, which represents \"*Part 1: Country codes*\".\n\nThe namespace `iso_3166_1` groups all ISO country codes, so the `ITA` local identifier may be used under a different namespace.\n\n\n\n```json\n{\n\t\"term_code\": {\n\t\t\"lid\": \"iso\",\n\t\t\"gid\": \"iso\",\n\t\t\"aid\": [\"iso\"]\n\t},\n\t...\n}\n```\n\nThis term has *no namespace*, it represents the *top level namespace*, `iso`, of the term in the previous example."
+				"iso_639_3_eng": "```json\n{\n\t\"term_code\": {\n\t\t\"nid\": \"iso_3166_1\",\n\t\t\"lid\": \"ITA\",\n\t\t\"gid\": \"iso_3166_1_ITA\",\n\t\t\"aid\": [\"ITA\", \"IT\"],\n\t\t\"regexp\": \"[A-Z]{3,3}\"\n\t},\n\t...\n}\n```\n\nThis term, with [global identifier](gid.md) `iso_3166_1_ITA`, represents the *ISO country code* for *Italy*. It has a [local identifier](lid.md) `ITA` and a *namespace* `iso_3166_1`. \n\nThe [local identifier](lid.md) `ITA` must be *unique* within the *namespace* `iso_3166_1`, no two terms with that *namespace* can have a [local identifier](lid.md) equal to `ITA`.\n\nThe [global identifier](gid.md) of the term is the *concatenation* of the *namespace* and the [local identifier](lid.md), separated by an *underscore token* [`_`], the [global identifier](gid.md) is the *unique identifier* of the term *among all namespaces*.\n\nThe role of the *namespace* is to group all [local identifiers](lid.md) under a common category.\n\n\n\n```json\n{\n\t\"term_code\": {\n\t\t\"lid\": \"iso\",\n\t\t\"gid\": \"iso\",\n\t\t\"aid\": [\"iso\"]\n\t},\n\t...\n}\n```\n\nThis term has no *namespace*, it represents the *top level namespace*, `iso`, of the term in the previous example. When a term has *no namespace* its [global identifier](gid.md) will be equal to its [local identifier](lid.md)."
+			}
+		},
+		"term_type": {
+			"type": "type_object",
+			"kind": "term"
+		},
+		"term_prop": {
+			"expected": [
+				"term_code",
+				"term_info",
+				"term_cats",
+				"term_type",
+				"term_prop"
+			],
+			"required": [
+				"term_code",
+				"term_info"
+			]
+		}
+	},
+	{
+		"term_code": {
+			"lid": "lid",
+			"gid": "lid",
+			"aid": ["lid"]
+		},
+		"term_info": {
+			"title": {
+				"iso_639_3_eng": "Local identifier"
+			},
+			"definition": {
+				"iso_639_3_eng": "The unique identifier of the term within its namespace."
+			},
+			"description": {
+				"iso_639_3_eng": "Terms are *uniquely identified* by their [global identifier](gid.md), which is the concatenation of their [namespace](nid.md) *identifier* and *local identifier*, separated by an underscore (`_`) *token*.\n\nThe value of this field is used as an *identifier*, so it is required to exclude characters which are not allowed in *variable* or *field* names. The value must also *exclude* the underscore (`_`) *token*, which represents the separator between the [namespace](nid.md) and this field.\n\nThis field is *required* and must be *unique* within its [namespace](nid.md), once set, the value *cannot be changed*."
+			},
+			"examples": {
+				"iso_639_3_eng": "```json\n{\n\t\"term_code\": {\n\t\t\"nid\": \"iso_3166_1\",\n\t\t\"lid\": \"ITA\",\n\t\t\"gid\": \"iso_3166_1_ITA\",\n\t\t\"aid\": [\"ITA\", \"IT\"],\n\t\t\"regexp\": \"[A-Z]{3,3}\"\n\t},\n\t...\n}\n```\n\nThis term, with [global identifier](gid.md) `iso_3166_1_ITA`, represents the *ISO country code* for *Italy*. It has a *local identifier* `ITA` and a [namespace](nid.md) `iso_3166_1`. \n\nThe *local identifier* `ITA` must be *unique* within the [namespace](nid.md) `iso_3166_1`, no two terms with that [namespace](nid.md) can have a [local identifier](lid.md) equal to `ITA`.\n\nThe [global identifier](gid.md) of the term is the *concatenation* of the [namespace](nid.md) and the *local identifier*, separated by an *underscore token* [`_`], the [global identifier](gid.md) is the *unique identifier* of the term *among all namespaces*.\n\nThe role of the *local identifier* is to represent the term code, such as the code of an individual element of a controlled vocabulary. When the *context is set* by the [namespace](nid.md), the *local identifier* becomes the *unique identifier*.\n\n\n\n```json\n{\n\t\"term_code\": {\n\t\t\"lid\": \"iso\",\n\t\t\"gid\": \"iso\",\n\t\t\"aid\": [\"iso\"]\n\t},\n\t...\n}\n```\n\nThis term has no [namespace](nid.md), it represents the *top level* [namespace](nid.md), `iso`, of the term in the previous example. When a term has *no* [namespace](nid.md) its [global identifier](gid.md) will be equal to its *local identifier*."
 			}
 		},
 		"term_type": {
