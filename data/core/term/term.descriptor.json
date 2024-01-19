@@ -69,7 +69,8 @@
 				"lid",
 				"gid",
 				"pid",
-				"aid"
+				"aid",
+				"regexp"
 			],
 			"required": [
 				"lid",
@@ -78,7 +79,6 @@
 			]
 		}
 	},
-	
 	{
 		"term_info": {
 			"nid": "term",
@@ -121,7 +121,6 @@
 			]
 		}
 	},
-	
 	{
 		"term_info": {
 			"nid": "term",

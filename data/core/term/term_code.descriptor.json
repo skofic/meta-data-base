@@ -1,0 +1,40 @@
+[
+	{
+		"term_code": {
+			"lid": "nid",
+			"gid": "nid",
+			"aid": ["nid"]
+		},
+		"term_info": {
+			"title": {
+				"iso_639_3_eng": "Namespace identifier"
+			},
+			"definition": {
+				"iso_639_3_eng": "Reference to the term that represents the namespace of the current term."
+			},
+			"description": {
+				"iso_639_3_eng": "*Namespaces* are used to *group* terms under the same *category* or *classification*, the value of this property is the [global identifier](gid.md) of the *term* that *represents* the *namespace* of the *current term*.\n\nNamespaces are also used to *disambiguate* [local identifiers](lid.md): *local identifiers* must be *unique* within the same *namespace*.\n\n*Most* terms will have a namespace, but this property is *not required*: terms that do not have a namespace are usually used as top level namespaces.\n\nAny term's [global identifier](gid.md) can be used as a *namespace*."
+			},
+			"examples": {
+				"iso_639_3_eng": "```json\n{\n\t\"term_code\": {\n\t\t\"nid\": \"iso_3166_1\",\n\t\t\"lid\": \"ITA\",\n\t\t\"gid\": \"iso_3166_1_ITA\",\n\t\t\"aid\": [\"ITA\", \"IT\"],\n\t\t\"regexp\": \"[A-Z]{3,3}\"\n\t},\n\t...\n}\n```\n\nThis term, with [global identifier](gid.md) `iso_3166_1_ITA`, represents the *ISO country code* for *Italy*, it has a [local identifier](lid.md) `ITA` and a *namespace* `iso_3166_1`. This *namespace* is the concatenation of the following *namespaces*:\n\n- `iso`: A term that represents the \"*International Standards Organisation*\" (ISO) root namespace.\n- `3166`: A term, that has the `iso` term as its *namespace*, which represents the \"*codes for the representation of names of countries and their subdivisions*\".\n- `1`: A term, that has the `iso_3166` term as its *namespace*, which represents \"*Part 1: Country codes*\".\n\nThe namespace `iso_3166_1` groups all ISO country codes, so the `ITA` local identifier may be used under a different namespace.\n\n\n\n```json\n{\n\t\"term_code\": {\n\t\t\"lid\": \"iso\",\n\t\t\"gid\": \"iso\",\n\t\t\"aid\": [\"iso\"]\n\t},\n\t...\n}\n```\n\nThis term has *no namespace*, it represents the *top level namespace*, `iso`, of the term in the previous example."
+			}
+		},
+		"term_type": {
+			"type": "type_object",
+			"kind": "term"
+		},
+		"term_prop": {
+			"expected": [
+				"term_code",
+				"term_info",
+				"term_cats",
+				"term_type",
+				"term_prop"
+			],
+			"required": [
+				"term_code",
+				"term_info"
+			]
+		}
+	}
+]
