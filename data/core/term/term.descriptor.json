@@ -1,149 +1,153 @@
 [
 	{
-		"term_code": {
-			"term_lid": "term",
-			"term_gid": "term",
-			"term_aid": ["term"]
+		"_key": "_term",
+		"_code": {
+			"_nid": "",
+			"_lid": "term",
+			"_gid": "_term",
+			"_aid": ["term"]
 		},
-		"term_info": {
-			"title": {
+		"_info": {
+			"_title": {
 				"iso_639_3_eng": "Term"
 			},
-			"definition": {
+			"_definition": {
 				"iso_639_3_eng": "Data dictionary base entity."
 			},
-			"description": {
-				"iso_639_3_eng": "The *term* is the *base element* of the *data dictionary*. All elements of this ontology are terms that, depending on their properties, serve as *types*, *variables* and other elements that comprise the data dictionary.\n\nA term has *five sections*, or structures, that determine its *function*:\n\n- [Code section](term_code.md): this section contains *all* the necessary *properties* that *define* the *term identification*. This section determines the *unique identifier* of the term in the *database* and the various other *identifiers* by which the term is *referred* to *outside* of the data dictionary. All terms *require* this section.\n- [Information section](term_info.md): while the previous section is more relevant to a computer, this section provides *information* to *humans* regarding the *term*. The *structure* contains a set of *properties* that should provide a *title*, *definition*, *description*, *examples* and other textual data to *inform* a *reader* on what is the *purpose* of the term and *how* to *use* it. All terms *should require* this section, except if the term is an internal private element of the dictionary whose purpose is not to be published.\n- [Categories section](term_cats.md): this section contains a series of *controlled vocabulary* properties that collect all the *main categories* to which the *term belongs*. It includes the *classes*, *domains*, *keywords* and *tags* associated with the term. The purpose of this section is to *group* together all the *enumerated information*, this section is *not required*.\n- [Types section](term_type.md): this section is *required* by *terms* that *represent descriptors*, it contains *properties* that define the *shape* and *type* of the *data* the term can *hold*. The section indicates the *shape* of the *data*, whether it is a *scalar* value or a *container* of values, the *data type* of the scalar elements, and the *constraints* that apply to *values*.\n- [Properties section](term_prop.md): this section is *required* by *terms* that represent *structure types*. The section contains which properties are *required*, which *should not* be *included* and which properties one *may expect* in *descriptors* of *that type*.\n\nSince the *function* of a term *depends* on *which sections* it *features*, a term may fill *several roles*. For instance, a data structure descriptor may also represent the data type of that structure, in that case it would feature both the categories and properties sections.\n\nBesides the above sections, terms can be related in graph structures that are used to represent controlled vocabularies and other hierarchical structures. Elements of enumerations are related to each other by edge records which feature predicates and other data."
+			"_description": {
+				"iso_639_3_eng": "The *term* is the *base element* of the *data dictionary*. *All elements* of the *dictionary* are *terms* that, depending on which sections they feature, fill the role of *descriptors*, *types*, *structures* and *other* constructs that comprise the data dictionary.\n\nTerms feature *five sections*, or structures, that determine their *function*:\n\n- [Code section](_code.md). This section is used to *uniquely identify* the *term* in the data dictionary and provide *codes* that can be used to *share* the *term* in *other contexts*. All terms *require* this section.\n- [Information section](_info.md). This section serves the purpose of *defining* and *describing* the term to human users. All terms *require* this section.\n- [Categories section](_cats.md). This section groups *controlled vocabulary properties* that are used to define the *tags* and *categories* to which the term belongs to. This section is *optional*.\n- [Data section](_data.md). This section defines what *shape*, *type* and *constraints* apply to *data* belonging to the current term. All *terms* that represent *descriptors* or *variables* must *include* this section.\n- [Properties section](_prop.md). This section defines the *contents* of a *structure*, it indicates what *properties* are *allowed*, *required* or *forbidden*. All terms that represent an *object data type* must include this section, unless no constraints are required.\n\nA term can have *more* than *one* role, depending on *which sections* it features. Terms that represent *controlled vocabulary elements* are organised in *hierarchical structures* that are implemented by directional predicate *graphs*.\n\nThe unique identifier, `_key`, of the term is, by convention, set to the term's [global identifier](_gid.md)."
 			},
-			"examples": {
+			"_examples": {
 				"iso_639_3_eng": "The following structure is the `term` term.\n\nIt has the [code section](term_code.md), `term_code`, and the [information section](term_info.md), `term_info`, which determine its *identifiers* and provide all the necessary *information* for a human reader.\n\nThe structure also contains a [type section](term_type.md), `term_type`, that indicates that the term is a *descriptor*  representing an *object* defined by the `term` *structure type*.\n\nThis structure type is implemented by the [properties section](term_prop.md), `term_prop`, that features the list of *expected* and *required* properties, this information will be used when *validating* terms.\n\n```json\n{\n\t\"term_code\": {\n\t\t\"lid\": \"term\",\n\t\t\"gid\": \"term\",\n\t\t\"aid\": [\"term\"]\n\t},\n\t\"term_info\": {\n\t\t\"title\": {\n\t\t\t\"iso_639_3_eng\": \"Term\"\n\t\t},\n\t\t\"definition\": {\n\t\t\t\"iso_639_3_eng\": \"Data dictionary base entity.\"\n\t\t},\n\t\t\"description\": {\n\t\t\t\"iso_639_3_eng\": \"The *term* is the *base element* of...\"\n\t\t}\n\t},\n\t\"term_type\": {\n\t\t\"type\": \"type_object\",\n\t\t\"kind\": \"term\"\n\t},\n\t\"term_prop\": {\n\t\t\"expected\": [\n\t\t\t\"term_code\",\n\t\t\t\"term_info\",\n\t\t\t\"term_cats\",\n\t\t\t\"term_type\",\n\t\t\t\"term_prop\"\n\t\t],\n\t\t\"required\": [\n\t\t\t\"term_code\",\n\t\t\t\"term_info\"\n\t\t]\n\t}\n}\n\n```"
 			}
 		},
-		"term_data": {
-			"term_type": "type_object",
-			"term_kind": "term"
-		},
-		"term_prop": {
-			"term_properties_expected": [
-				"term_code",
-				"term_info",
-				"term_cats",
-				"term_type",
-				"term_prop"
-			],
-			"term_properties_required": [
-				"term_code",
-				"term_info"
-			]
+		"_prop": {
+			"_prop_expected": {
+				"_prop_any": [
+					"_key",
+					"_code",
+					"_info",
+					"_cats",
+					"_data",
+					"_prop"
+				]
+			}
+			"_prop_required": {
+				"_prop_all": [
+					"_key",
+					"_code",
+					"_info"
+				]
+			}
 		}
 	},
 	
 	{
-		"term_code": {
-			"term_nid": "term",
-			"term_lid": "code",
-			"term_gid": "term_code",
-			"term_aid": ["term_code"]
+		"_key": "_code",
+		"_code": {
+			"_nid": "",
+			"_lid": "code",
+			"_gid": "_code",
+			"_aid": ["code"]
 		},
-		"term_info": {
-			"title": {
+		"_info": {
+			"_title": {
 				"iso_639_3_eng": "Code section"
 			},
-			"definition": {
+			"_definition": {
 				"iso_639_3_eng": "Term identification section."
 			},
-			"description": {
+			"_description": {
 				"iso_639_3_eng": "The *identification section* of a *term* is used to provide the term *identification*. It features a series of properties that record the different elements of the *codes* that *identify* the *term*:\n\n- [Namespace](term_nid.md) (`nid`): this is a *code* that *represents* the *namespace* of the identifier. Namespaces are used to allow having the same [local identifier](term_lid.md) in different contexts, it also allows grouping a set of identifiers under a common symbol. This property is *optional*.\n- [Local identifier](term_lid.md) (`lid`): this is the *code* that *identifies* the term *within* its [*namespace*](term_nid.md), it can be considered the term's *code*. This property is *required*.\n- [Global identifier](term_gid.md) (`gid`): this is the *unique identifier* of the *term* *among all namespaces*. The code is the *concatenation* of the [*namespace*](term_nid.md) and the [*local identifier*](term_lid.md) separated by an *underscore* (`_`) token. This property is *computed* and *required*.\n- [Provider identifiers](term_pid.md) (`pid`): this is a *list of identifiers* that are *in use* with *data providers*. This should include the different *variable names* used by the data providers when exchanging datasets. This property is *optional*.\n- [All identifiers](term_aid.md) (`aid`): this is the list of *all known identifiers* associated with the *term*. These can be ontology references, variable names and other names with which the term is referred to. This property is *required* and should at least hold the [global identifier](term_gid.md).\n\nAll terms require this section which governs how terms are identified in the database.\n\nTerms that represent a *namespace*, or that can be *applied* in *different contexts* can omit the *namespace*; for all other terms it is *strongly recommended* to *use a namespace*, in order *not* to *clutter* *top level identifiers*."
 			},
-			"examples": {
-				"iso_639_3_eng": "The following structure represents the *code section* of the `term` [term](term.md). It has no [namespace](term_nid.md), its [global identifier](term_gid.md) is the same value as its [local identifier](term_lid.md). It has the list of [all identifiers](term_aid.md) that only holds its *required* value, which is the [global identifier](term_gid.md).\n\n```json\n{\n\t\"term_code\": {\n\t\t\"lid\": \"term\",\n\t\t\"gid\": \"term\",\n\t\t\"aid\": [\"term\"]\n\t}\n}\n\n```\n\nIn the following example we show the *code section* of a *term* that *represents* the ISO 3166-1 code for the country Italy. Note that the namespace is already a combination of the ISO namespace, with the ISO 3166 standard and the ISO 3166-1 standard. Here the [all identifiers](term_aid.md) property holds the [global identifier](term_gid.md), the [local identifier](term_lid.md) and another code by which the country Italy can be identified.\n\n```json\n{\n\t\"term_code\": {\n\t\t\"nid\": \"iso_3166_1\",\n\t\t\"lid\": \"ITA\",\n\t\t\"gid\": \"iso_3166_1_ITA\",\n\t\t\"aid\": [\n\t\t\t\"iso_3166_1_ITA\",\n\t\t\t\"ITA\",\n\t\t\t\"IT\"\n\t\t]\n\t}\n}\n```\n\nIn the following example we show the *code section* of a *term* that *represents* the *average elevation* descriptor. Here we see two namespaces: the *environment*, `env`, and the *elevation*, `elevation`, terms joined together to group *all elevation related terms*. This has a reason when we want to differentiate *average*, *standard deviation*, *variance*, etc.\n\nIn this example we can see that the provider identifiers include two variable names that are used by our data providers. In the [all identifiers](term_aid.md) property we include the term's [global identifier](term_gid.md), the [provider identifiers](term_pid.md) and the identifier given by the [WikiData](https://www.wikidata.org/wiki/Wikidata:Main_Page) ontology to [elevation](https://www.wikidata.org/wiki/Property:P2044).\n\n```json\n{\n\t\"term_code\": {\n\t\t\"nid\": \"env_elevation\",\n\t\t\"lid\": \"avg\",\n\t\t\"gid\": \"env_elevation_avg\",\n\t\t\"pid\": [\n\t\t\t\"AvElevation\",\n\t\t\t\"average_elevation\"\n\t\t],\n\t\t\"aid\": [\n\t\t\t\"env_elevation_avg\",\n\t\t\t\"AvElevation\",\n\t\t\t\"average_elevation\",\n\t\t\t\"wikidata:P2044\"\n\t\t]\n\t}\n}\n```\n\n"term_code": {\tn\t\t"lid": "term",\tn\t\t"gid": "term",\tn\t\t"aid": ["term"]\tn\t},\tn\t"term_info": {\tn\t\t"title": {\tn\t\t\t"iso_639_3_eng": "Term"\tn\t\t},\tn\t\t"definition": {\tn\t\t\t"iso_639_3_eng": "Data dictionary base entity."\tn\t\t},\tn\t\t"description": {\tn\t\t\t"iso_639_3_eng": "The *term* is the *base element* of..."\tn\t\t}\tn\t},\tn\t"term_data": {\tn\t\t"type": "type_object",\tn\t\t"kind": "term"\tn\t},\tn\t"term_prop": {\tn\t\t"expected": [\tn\t\t\t"term_code",\tn\t\t\t"term_info",\tn\t\t\t"term_cats",\tn\t\t\t"term_type",\tn\t\t\t"term_prop"\tn\t\t],\tn\t\t"required": [\tn\t\t\t"term_code",\tn\t\t\t"term_info"\tn\t\t]\tn\t}\tn}\tn\tn```\tn"
+			"_examples": {
+				"iso_639_3_eng": "The following structure represents the *code section* of the `term` [term](term.md). It has no [namespace](term_nid.md), its [global identifier](term_gid.md) is the same value as its [local identifier](term_lid.md). It has the list of [all identifiers](term_aid.md) that only holds its *required* value, which is the [global identifier](term_gid.md).\n\n```json\n{\n\t\"term_code\": {\n\t\t\"lid\": \"term\",\n\t\t\"gid\": \"term\",\n\t\t\"aid\": [\"term\"]\n\t}\n}\n\n```\n\nIn the following example we show the *code section* of a *term* that *represents* the ISO 3166-1 code for the country Italy. Note that the namespace is already a combination of the ISO namespace, with the ISO 3166 standard and the ISO 3166-1 standard. Here the [all identifiers](term_aid.md) property holds the [global identifier](term_gid.md), the [local identifier](term_lid.md) and another code by which the country Italy can be identified.\n\n```json\n{\n\t\"term_code\": {\n\t\t\"nid\": \"iso_3166_1\",\n\t\t\"lid\": \"ITA\",\n\t\t\"gid\": \"iso_3166_1_ITA\",\n\t\t\"aid\": [\n\t\t\t\"iso_3166_1_ITA\",\n\t\t\t\"ITA\",\n\t\t\t\"IT\"\n\t\t]\n\t}\n}\n```\n\nIn the following example we show the *code section* of a *term* that *represents* the *average elevation* descriptor. Here we see two namespaces: the *environment*, `env`, and the *elevation*, `elevation`, terms joined together to group *all elevation related terms*. This has a reason when we want to differentiate *average*, *standard deviation*, *variance*, etc.\n\nIn this example we can see that the provider identifiers include two variable names that are used by our data providers. In the [all identifiers](term_aid.md) property we include the term's [global identifier](term_gid.md), the [provider identifiers](term_pid.md) and the identifier given by the [WikiData](https://www.wikidata.org/wiki/Wikidata:Main_Page) ontology to [elevation](https://www.wikidata.org/wiki/Property:P2044).\n\n```json\n{\n\t\"term_code\": {\n\t\t\"nid\": \"env_elevation\",\n\t\t\"lid\": \"avg\",\n\t\t\"gid\": \"env_elevation_avg\",\n\t\t\"pid\": [\n\t\t\t\"AvElevation\",\n\t\t\t\"average_elevation\"\n\t\t],\n\t\t\"aid\": [\n\t\t\t\"env_elevation_avg\",\n\t\t\t\"AvElevation\",\n\t\t\t\"average_elevation\",\n\t\t\t\"wikidata:P2044\"\n\t\t]\n\t}\n}\n```\n\n"_code": {\tn\t\t"_lid": "term",\tn\t\t"_gid": "term",\tn\t\t"_aid": ["term"]\tn\t},\tn\t"_info": {\tn\t\t"_title": {\tn\t\t\t"iso_639_3_eng": "Term"\tn\t\t},\tn\t\t"_definition": {\tn\t\t\t"iso_639_3_eng": "Data dictionary base entity."\tn\t\t},\tn\t\t"_description": {\tn\t\t\t"iso_639_3_eng": "The *term* is the *base element* of..."\tn\t\t}\tn\t},\tn\t"_data": {\tn\t\t"type": "type_object",\tn\t\t"kind": "term"\tn\t},\tn\t"_prop": {\tn\t\t"expected": [\tn\t\t\t"_code",\tn\t\t\t"_info",\tn\t\t\t"_data",\tn\t\t\t"_data",\tn\t\t\t"_prop"\tn\t\t],\tn\t\t"required": [\tn\t\t\t"_code",\tn\t\t\t"_info"\tn\t\t]\tn\t}\tn}\tn\tn```\tn"
 			}
 		},
-		"term_data": {
-			"term_type": "type_object",
-			"term_kind": "term_code"
+		"_data": {
+			"_data": "type_object",
+			"term_kind": "_code"
 		},
-		"term_prop": {
+		"_prop": {
 			"term_properties_expected": [
-				"term_nid",
-				"term_lid",
-				"term_gid",
-				"term_pid",
-				"term_aid",
+				"_nid",
+				"_lid",
+				"_gid",
+				"_pid",
+				"_aid",
 				"regexp"
 			],
 			"term_properties_required": [
-				"term_lid",
-				"term_gid",
-				"term_aid"
+				"_lid",
+				"_gid",
+				"_aid"
 			]
 		}
 	},
 	{
-		"term_code": {
-			"nid": "term",
-			"lid": "info",
-			"gid": "term_info",
-			"aid": ["term_info"]
+		"_key": "_info",
+		"_code": {
+			"_nid": "",
+			"_lid": "info",
+			"_gid": "_info",
+			"_aid": ["info"]
 		},
-		"term_info": {
-			"title": {
+		"_info": {
+			"_title": {
 				"iso_639_3_eng": "Information section"
 			},
-			"definition": {
+			"_definition": {
 				"iso_639_3_eng": "Term information section."
 			},
-			"description": {
+			"_description": {
 				"iso_639_3_eng": "The *information section* of a *term* is used to provide term *information* to *humans*. Unlike the [identification section](term_code.md), that concerns mostly the dictionary *database*, the *information section* concerns *human users* that want to get *information* regarding *terms*. This section features a series of properties that cover the different angles of the term in question:\n\n- [Name](name.md) (`name`): the *name* is a bridge between the identification section and the information section, it should reflect the term's *given name*. It is a *single string*, so it should be in the original language, if relevant.\n- [Title](title.md) (`title`): the *title* or *label* for the term. A title example could be a label in a form. This property contains a *plain text* value *indexed* by *language*. This element is *required*.\n- [Definition](definition.md) (`definition`): this property contains a *plain text* value *indexed* by *language*, it should provide a *concise explanation* of the term, *understandable* by people *familiar* with the *subject matter*. The property is *strongly recommended*, but can be *omitted* in obvious cases.\n- [Description](description.md) (`description`): this property should contain all the remaining *information* that can be of use to people *not necessarily familiar* with the *subject matter*. In particular, this field should provide information on *why* the *term* is *important*, on *how* to *use* it and on *what* are the *methods* to obtain eventual data related to the term. Once somebody has read this field, he/she should be able to take advantage of the term and use it at its best. This field is also *indexed* by *language* and the text is in Markdown. This property is *strongly recommended*, but can be *omitted* in obvious cases.\n- [Examples](examples.md) (`examples`): this property should contain *usage examples* of the *term*. This field makes sense only in situations where the term is a descriptor that must be filled using a special protocol, or in cases where it can be used in different ways. The field is *indexed* by *language* and the text is encoded in Markdown. This field is *optional*.\n- [Notes](notes.md) (`notes`): this is an *array* of Markdown encoded *notes* that users may share to provide a better understanding and feedback on the term. There is no language information, these notes are a notepad for users. This field is *optional*.\n- [References](references.md) (`references`): a list of Markdown encoded texts that should provide a *list* of *internet references* concerning the term. Provide here any URL referring to the term and use the Markdown text to qualify the link. This field is *optional*.\n- [Providers](providers.md) (`providers`): a list of Markdown encoded texts that should provide *references* to the *providers* or *curators* of the *term*. The Markdown text can be used to indicate what aspects of the term the list element refers to. This field is *optional*.\n\nThis section will be used when creating input forms or data reports."
 			},
-			"examples": {
-				"iso_639_3_eng": "The following structure represents the *information section* of a descriptor term for *elevation*. The [title](title.md) can be used as a *form label*. The [definition](definition.md) provides a concise *definition* for the term. The [description](description.md) is kept short, but in practice it should contain all the information that was not yet conveyed in the *title* and *definition*. The [examples](examples.md), in this case, are not really required, except to indicate that elevation may be negative. [Notes](notes.md) are a collection of user feedback. [References](references.md) provide links to Wikidata, Wikipedia and National Geographic in which the elevation term is discussed. In [providers](providers.md) we provide the contact for the ficticious *curator* of the term, to which it should be possible to *send inquiries*.\n\n```json\n{\n\t\"term_info\": {\n\t\t\"title\": {\"iso_639_3_eng\": \"Average elevation\"},\n\t\t\"definition\": {\"iso_639_3_eng\": \"Elevation in meters above sea level.\"},\n\t\t\"description\": {\"iso_639_3_eng\": \"Height of the area in meters as measured relative to sea level.\"},\n\t\t\"examples\": {\"iso_639_3_eng\": \"1500, 0, -150\"},\n\t\t\"notes\": [\n\t\t\t\"L'altezza si intende in metri.\",\n\t\t\t\"The measurement should not represent the elevation of a point, rather the average elevation of an area.\"\n\t\t],\n\t\t\"references\": [\n\t\t\t\"[Wikidata](https://www.wikidata.org/wiki/Property:P2044)\",\n\t\t\t\"[National Geographic](https://education.nationalgeographic.org/resource/elevation/#)\",\n\t\t\t\"[Wikipedia](https://en.wikipedia.org/wiki/Elevation)\"\n\t\t],\n\t\t\"providers\": [\"John Doe <john.doe@somemail.something>\"]\n\t}\n}\n\n```"term_code": {\tn\t\t"lid": "term",\tn\t\t"gid": "term",\tn\t\t"aid": ["term"]\tn\t},\tn\t"term_info": {\tn\t\t"title": {\tn\t\t\t"iso_639_3_eng": "Term"\tn\t\t},\tn\t\t"definition": {\tn\t\t\t"iso_639_3_eng": "Data dictionary base entity."\tn\t\t},\tn\t\t"description": {\tn\t\t\t"iso_639_3_eng": "The *term* is the *base element* of..."\tn\t\t}\tn\t},\tn\t"term_data": {\tn\t\t"type": "type_object",\tn\t\t"kind": "term"\tn\t},\tn\t"term_prop": {\tn\t\t"expected": [\tn\t\t\t"term_code",\tn\t\t\t"term_info",\tn\t\t\t"term_cats",\tn\t\t\t"term_type",\tn\t\t\t"term_prop"\tn\t\t],\tn\t\t"required": [\tn\t\t\t"term_code",\tn\t\t\t"term_info"\tn\t\t]\tn\t}\tn}\tn\tn```\tn"
+			"_examples": {
+				"iso_639_3_eng": "The following structure represents the *information section* of a descriptor term for *elevation*. The [title](title.md) can be used as a *form label*. The [definition](definition.md) provides a concise *definition* for the term. The [description](description.md) is kept short, but in practice it should contain all the information that was not yet conveyed in the *title* and *definition*. The [examples](examples.md), in this case, are not really required, except to indicate that elevation may be negative. [Notes](notes.md) are a collection of user feedback. [References](references.md) provide links to Wikidata, Wikipedia and National Geographic in which the elevation term is discussed. In [providers](providers.md) we provide the contact for the ficticious *curator* of the term, to which it should be possible to *send inquiries*.\n\n```json\n{\n\t\"term_info\": {\n\t\t\"title\": {\"iso_639_3_eng\": \"Average elevation\"},\n\t\t\"definition\": {\"iso_639_3_eng\": \"Elevation in meters above sea level.\"},\n\t\t\"description\": {\"iso_639_3_eng\": \"Height of the area in meters as measured relative to sea level.\"},\n\t\t\"examples\": {\"iso_639_3_eng\": \"1500, 0, -150\"},\n\t\t\"notes\": [\n\t\t\t\"L'altezza si intende in metri.\",\n\t\t\t\"The measurement should not represent the elevation of a point, rather the average elevation of an area.\"\n\t\t],\n\t\t\"references\": [\n\t\t\t\"[Wikidata](https://www.wikidata.org/wiki/Property:P2044)\",\n\t\t\t\"[National Geographic](https://education.nationalgeographic.org/resource/elevation/#)\",\n\t\t\t\"[Wikipedia](https://en.wikipedia.org/wiki/Elevation)\"\n\t\t],\n\t\t\"providers\": [\"John Doe <john.doe@somemail.something>\"]\n\t}\n}\n\n```"_code": {\tn\t\t"_lid": "term",\tn\t\t"_gid": "term",\tn\t\t"_aid": ["term"]\tn\t},\tn\t"_info": {\tn\t\t"_title": {\tn\t\t\t"iso_639_3_eng": "Term"\tn\t\t},\tn\t\t"_definition": {\tn\t\t\t"iso_639_3_eng": "Data dictionary base entity."\tn\t\t},\tn\t\t"_description": {\tn\t\t\t"iso_639_3_eng": "The *term* is the *base element* of..."\tn\t\t}\tn\t},\tn\t"_data": {\tn\t\t"type": "type_object",\tn\t\t"kind": "term"\tn\t},\tn\t"_prop": {\tn\t\t"expected": [\tn\t\t\t"_code",\tn\t\t\t"_info",\tn\t\t\t"_data",\tn\t\t\t"_data",\tn\t\t\t"_prop"\tn\t\t],\tn\t\t"required": [\tn\t\t\t"_code",\tn\t\t\t"_info"\tn\t\t]\tn\t}\tn}\tn\tn```\tn"
 			}
 		},
-		"term_data": {
+		"_data": {
 			"type": "type_object",
-			"kind": "term_info"
+			"kind": "_info"
 		},
-		"term_prop": {
+		"_prop": {
 			"properties_expected": [
 				"name",
-				"title",
-				"definition",
-				"description",
-				"examples",
-				"notes",
-				"references",
-				"providers"
+				"_title",
+				"_definition",
+				"_description",
+				"_examples"
 			],
 			"properties_required": [
-				"title",
-				"definition"
+				"_title",
+				"_definition"
 			]
 		}
 	},
 	{
-		"term_code": {
-			"nid": "term",
-			"lid": "cats",
-			"gid": "term_cats",
-			"aid": ["term_cats"]
+		"_key": "_cats",
+		"_code": {
+			"_nid": "",
+			"_lid": "cats",
+			"_gid": "_cats",
+			"_aid": ["cats"]
 		},
-		"term_info": {
-			"title": {
+		"_info": {
+			"_title": {
 				"iso_639_3_eng": "Categories section"
 			},
-			"definition": {
+			"_definition": {
 				"iso_639_3_eng": "Term categories section."
 			},
-			"description": {
+			"_description": {
 				"iso_639_3_eng": "The *categories section* of a *term* is used to group all *categorical properties* in a *single section*. These categorical properties should provide both *information* on the *nature* of the *term*, as well as providing *keywords* that can be used to *search* the *dictionary*:\n\n- [Class](class.md) (`class`): the *class* of a term represents the *term's* *nature* and *function*, whether it is an *identifier*, a *quantitative* value or a *categorical* value. The field is an *array* of *controlled vocabulary elements*, so more than one category may apply. This category is *required*, at least to indicate whether descriptors hold *quantitative* values or not.\n- [Domain](domain.md) (`domain`): the *domain* of a term should indicate whether the *term* is *environmental*, *economic*, *genetic*, *phenotipic*, etc. It should indicate to what *domains* the *term belongs*. This is also a *list* of *controlled vocabulary elements*, so a *term* may have *several domains*. This field should be filled *if relevant*.\n- [Tags](tag.md) (`tag`): this property is a *list* of *controlled vocabulary elements* that indicate what *usage* the term may have. For instance, if the term is a descriptor that is used to illustrate the *vulnerability* of a population you would create the vulnerability tag and assign it. This property should be managed by the different teams that use it.\n- [Keywords](keyword.md) (`keyword`): this property contains a *list of keywords* associated with the *term*. These keywords are *strings* and not controlled vocabularies, as with the other properties of this section, so you are free to use your own definitions. This is a *recommended* property in all cases.\n\nThe controlled vocabularies associated with these properties can be enriched in time with specialised enumerations that apply to specific areas of interest, this will allow *different teams* to *collaborate* *without disrupting* each other's *domains*."
 			}
 		},
-		"term_data": {
+		"_data": {
 			"type": "type_object",
-			"kind": "term_cats"
+			"kind": "_data"
 		},
-		"term_prop": {
+		"_prop": {
 			"properties_expected": [
 				"class",
 				"domain",
@@ -156,28 +160,29 @@
 		}
 	},
 	{
-		"term_code": {
-			"nid": "term",
-			"lid": "data",
-			"gid": "term_data",
-			"aid": ["term_data"]
+		"_key": "_data",
+		"_code": {
+			"_nid": "",
+			"_lid": "data",
+			"_gid": "_data",
+			"_aid": ["_data"]
 		},
-		"term_info": {
-			"title": {
+		"_info": {
+			"_title": {
 				"iso_639_3_eng": "Data section"
 			},
-			"definition": {
+			"_definition": {
 				"iso_639_3_eng": "Descriptor data definition section."
 			},
-			"description": {
+			"_description": {
 				"iso_639_3_eng": "The *data section* of a term *defines* the *type* and *constraints* of the *data* that the *term* should *contain*. All terms that represent a *data variable* or *descriptor* must feature this section. Here we find all the necessary information needed to *validate* data.\n\nThis object requires exactly *one* of the following properties:\n\n- [Scalar data container](term_scalar.md): This property contains the *data type* definitions and *constraints* for *scalar data values*. A *scalar value* is a *single primitive* value or *object*.\n- [Array data container](term_array.md): This property contains the *data type* definitions and *constraints* for *array data values*, which represent a *list* of *scalar values* of the *same type* that *may* include *duplicate values*.\n- [Set data container](term_set.md): This property contains the *data type* definitions and *constraints* for *set data values*, which represent a *list* of *scalar values*, except objects, of the *same type* whose values must be *unique*.\n- [Key/value dictionary data container](term_dict.md): This property contains the *key* and *value* definitions and *constraints* for *key/value dictionary values*. Keys must be *strings*, values can be of *any type*.\n\nYou can set this property to an *empty object*, in that case it means that there are *no constraints* for the current *descriptor values*.\n\nThis information is used to allow *data validation* and meaningful *data presentation*."
 			}
 		},
-		"term_data": {
+		"_data": {
 			"type": "type_object",
-			"kind": "term_data"
+			"kind": "_data"
 		},
-		"term_prop": {
+		"_prop": {
 			"term_properties_expected": [
 				"term_scalar",
 				"term_array",
