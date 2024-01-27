@@ -15,25 +15,23 @@
 				"iso_639_3_eng": "Data dictionary base entity."
 			},
 			"_description": {
-				"iso_639_3_eng": "The *term* is the *base element* of the *data dictionary*. *All elements* of the *dictionary* are *terms* that, depending on which sections they feature, fill the role of *descriptors*, *types*, *structures* and *other* constructs that comprise the data dictionary.\n\nTerms feature *five sections*, or structures, that determine their *function*:\n\n- [Code section](_code.md). This section is used to *uniquely identify* the *term* in the data dictionary and provide *codes* that can be used to *share* the *term* in *other contexts*. All terms *require* this section.\n- [Information section](_info.md). This section serves the purpose of *defining* and *describing* the term to human users. All terms *require* this section.\n- [Categories section](_cats.md). This section groups *controlled vocabulary properties* that are used to define the *tags* and *categories* to which the term belongs to. This section is *optional*.\n- [Data section](_data.md). This section defines what *shape*, *type* and *constraints* apply to *data* belonging to the current term. All *terms* that represent *descriptors* or *variables* must *include* this section.\n- [Properties section](_prop.md). This section defines the *contents* of a *structure*, it indicates what *properties* are *allowed*, *required* or *forbidden*. All terms that represent an *object data type* must include this section, unless no constraints are required.\n\nA term can have *more* than *one* role, depending on *which sections* it features. Terms that represent *controlled vocabulary elements* are organised in *hierarchical structures* that are implemented by directional predicate *graphs*.\n\nThe unique identifier, `_key`, of the term is, by convention, set to the term's [global identifier](_gid.md)."
-			},
-			"_examples": {
-				"iso_639_3_eng": "The following structure is the `term` term.\n\nIt has the [code section](term_code.md), `term_code`, and the [information section](term_info.md), `term_info`, which determine its *identifiers* and provide all the necessary *information* for a human reader.\n\nThe structure also contains a [type section](term_type.md), `term_type`, that indicates that the term is a *descriptor*  representing an *object* defined by the `term` *structure type*.\n\nThis structure type is implemented by the [properties section](term_prop.md), `term_prop`, that features the list of *expected* and *required* properties, this information will be used when *validating* terms.\n\n```json\n{\n\t\"term_code\": {\n\t\t\"lid\": \"term\",\n\t\t\"gid\": \"term\",\n\t\t\"aid\": [\"term\"]\n\t},\n\t\"term_info\": {\n\t\t\"title\": {\n\t\t\t\"iso_639_3_eng\": \"Term\"\n\t\t},\n\t\t\"definition\": {\n\t\t\t\"iso_639_3_eng\": \"Data dictionary base entity.\"\n\t\t},\n\t\t\"description\": {\n\t\t\t\"iso_639_3_eng\": \"The *term* is the *base element* of...\"\n\t\t}\n\t},\n\t\"term_type\": {\n\t\t\"type\": \"type_object\",\n\t\t\"kind\": \"term\"\n\t},\n\t\"term_prop\": {\n\t\t\"expected\": [\n\t\t\t\"term_code\",\n\t\t\t\"term_info\",\n\t\t\t\"term_cats\",\n\t\t\t\"term_type\",\n\t\t\t\"term_prop\"\n\t\t],\n\t\t\"required\": [\n\t\t\t\"term_code\",\n\t\t\t\"term_info\"\n\t\t]\n\t}\n}\n\n```"
+				"iso_639_3_eng": "The *term* is the *base element* of the *data dictionary*. *All elements* of the *dictionary* are *terms* that, depending on which sections they feature, fill the role of *descriptors*, *types*, *structures* and *other* constructs that comprise the data dictionary.\n\nA term features *six sections*, or *structures*, that determine its *function*:\n\n- [Identification section](_code.md). This section contains all the necessary information to *identify* terms, both in the *data dictionary* and when *sharing terms* in *other contexts*. All terms *require* this section.\n- [Information section](_info.md). This section contains a set of properties that are used to *define* and *describe terms* to *human users*. All terms *require* this section.\n- [Categories section](_tags.md). This section groups a set of *controlled vocabulary properties* that define *categories*, *groups* and *tags* associated with the term. This section is *optional*.\n- [Data section](_data.md). This section defines what *shape*, *type* and *constraints* apply to *data* belonging to the *current term*. This section is *required* for all *terms* that *represent descriptors* or *variables*, *terms* that *do not represent descriptors* must *omit* this section.\n- [Structure section](_struct.md). This section defines and object structure data type. It contains the necessary properties to indicate which properties the object is allowed, required or forbidden to feature. All terms that represent an *object data type* must include this section, unless no constraints are required. Terms that feature this section can be used as *structure data types*.\n- [Private section](_private.md). This section can be used to add *custom data* to the term, the section has *no constraints*, so you can *store* here *anything you need*. The contents of this section are considered *private*, so *no validation* will be performed. This section is *optional*.\n\nA term can have *more* than *one* role, depending on *which sections* it features. Terms that represent *controlled vocabulary elements* are organised in *hierarchical structures* that are implemented by directional predicate *graphs*.\n\nThe unique identifier, `_key`, of the term is, by convention, set to the term's [global identifier](_gid.md)."
 			}
 		},
-		"_prop": {
-			"_prop_expected": {
-				"_prop_any": [
+		"_struct": {
+			"_expected": {
+				"_term_descriptor_any": [
 					"_key",
 					"_code",
 					"_info",
-					"_cats",
+					"_tags",
 					"_data",
-					"_prop"
+					"_struct",
+					"_private"
 				]
 			}
-			"_prop_required": {
-				"_prop_all": [
+			"_required": {
+				"_term_descriptor_all": [
 					"_key",
 					"_code",
 					"_info"
@@ -52,7 +50,7 @@
 		},
 		"_info": {
 			"_title": {
-				"iso_639_3_eng": "Code section"
+				"iso_639_3_eng": "Identification section"
 			},
 			"_definition": {
 				"iso_639_3_eng": "Term identification section."
@@ -125,12 +123,12 @@
 		}
 	},
 	{
-		"_key": "_cats",
+		"_key": "_tags",
 		"_code": {
 			"_nid": "",
-			"_lid": "cats",
-			"_gid": "_cats",
-			"_aid": ["cats"]
+			"_lid": "tags",
+			"_gid": "_tags",
+			"_aid": ["tags"]
 		},
 		"_info": {
 			"_title": {
@@ -165,7 +163,7 @@
 			"_nid": "",
 			"_lid": "data",
 			"_gid": "_data",
-			"_aid": ["_data"]
+			"_aid": ["data"]
 		},
 		"_info": {
 			"_title": {
@@ -195,6 +193,67 @@
 				"term_set",
 				"term_dict"
 			]
+		}
+	},
+	{
+		"_key": "_struct",
+		"_code": {
+			"_nid": "",
+			"_lid": "struct",
+			"_gid": "_struct",
+			"_aid": ["struct"]
+		},
+		"_info": {
+			"_title": {
+				"iso_639_3_eng": "Structure section"
+			},
+			"_definition": {
+				"iso_639_3_eng": "Object structure definition section."
+			},
+			"_description": {
+				"iso_639_3_eng": "The *structure section* of a term contains the constraints that define an object data type. When a term *features* this *section* it become a *structure data type* that can be associated with *descriptor terms* of [object type](_type_object.md)."
+			}
+		},
+		"_data": {
+			"type": "type_object",
+			"kind": "_data"
+		},
+		"_prop": {
+			"term_properties_expected": [
+				"term_scalar",
+				"term_array",
+				"term_set",
+				"term_dict"
+			],
+			"term_properties_required_one-of": [
+				"term_scalar",
+				"term_array",
+				"term_set",
+				"term_dict"
+			]
+		}
+	},
+	{
+		"_key": "_private",
+		"_code": {
+			"_nid": "",
+			"_lid": "private",
+			"_gid": "_private",
+			"_aid": ["private"]
+		},
+		"_info": {
+			"_title": {
+				"iso_639_3_eng": "Private section"
+			},
+			"_definition": {
+				"iso_639_3_eng": "User defined and managed data section."
+			},
+			"_description": {
+				"iso_639_3_eng": "The *user section* of a term can be used to store *custom data*. If you need to add *custom properties* to *terms*, use *this section*."
+			}
+		},
+		"_data": {
+			"type": "type_object"
 		}
 	}
 ]
